@@ -1,0 +1,38 @@
+body {
+  color: white;
+}
+
+// button.gm-ui-hover-effect {
+//   display: none !important;
+// }
+
+// Map
+// .gm-style .gm-style-iw-c {
+//   padding: 0 !important;
+// }
+
+// .gm-style .gm-style-iw-d {
+//   overflow: initial !important;
+//   max-height: auto !important;
+// }
+
+//customDrawer
+.customDrawer {
+  .ant-drawer-header {
+    border: none;
+  }
+  .ant-drawer-header-title {
+    flex-direction: row-reverse;
+  }
+  .ant-drawer-title {
+    font-size: 24px;
+    color: #3a3a3c;
+    font-weight: 600;
+  }
+  .ant-drawer-body {
+    padding-top: 0;
+  }
+  .ant-drawer-footer {
+    border-top: 0;
+  }
+}
