@@ -8,6 +8,7 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { useDomainCustomSelector, useIpSelector } from "@/store/domain";
 import Link from "next/link";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const StepTwo = memo(() => {
   const headers: HeaderProps[] = [
@@ -65,7 +66,12 @@ const StepTwo = memo(() => {
   return (
     <Grid>
       <Field title="Tên miền">{domainNew}</Field>
-      <Field title="IP hiện tại">{ipNew}</Field>
+      <Field title="IP hiện tại">
+        <div className="flex ">
+          <div className="mr-2">{ipNew}</div>
+          <CheckCircleIcon color="success" />
+        </div>
+      </Field>
       <Field title="IP KiotVietWeb" className="flex flex-col">
         <Table headers={headers} items={mockdata} renderItem={renderItem} />
       </Field>

@@ -14,7 +14,7 @@ interface DomainState {
 
 // Define the initial state using that type
 const initialState: DomainState = {
-  domainCustom: undefined,
+  domainCustom: "",
   ipNew: "64.45.24.124",
   timeCoundown: undefined,
 };

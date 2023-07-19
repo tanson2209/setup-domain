@@ -1,5 +1,5 @@
 import WrapContent from "@/components/WrapContent";
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { Grid, Theme, TextField, Button } from "@mui/material";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
@@ -7,11 +7,12 @@ import { useDomainAction, useDomainCustomSelector } from "@/store/domain";
 import { isValidDomain } from "@/utils/validate";
 import { useRouter } from "next/router";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import InputAdornment from "@mui/material/InputAdornment";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Step = memo(() => {
   const { changeDomainInput } = useDomainAction();
-  const value = useDomainCustomSelector();
-  const checkDomain = isValidDomain(value);
+  const valueInput = useDomainCustomSelector();
   const router = useRouter();
   const { step } = router?.query;
   const isStepOne = step === "1" || step === undefined || step === "";
@@ -38,6 +39,9 @@ const Step = memo(() => {
       <></>
     );
   }, [step]);
+  const [checkIsFirst, setCheckIsFirst] = useState<boolean>(true);
+
+  const checkDomain = isValidDomain(valueInput);
 
   return (
     <WrapContent title="Tên miền tuỳ chỉnh" btn={btnBack}>
@@ -45,13 +49,21 @@ const Step = memo(() => {
         {isStepOne && (
           <TextField
             onChange={(event) => {
+              setCheckIsFirst(false);
               changeDomainInput(event.target.value);
             }}
-            value={value}
+            value={valueInput}
             className="py-2 w-full"
-            error={!checkDomain}
+            error={!checkDomain && !checkIsFirst}
             label="Nhập tên miền của bạn"
-            helperText="Incorrect entry."
+            helperText="Tên miền không đúng định dạng"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {checkDomain && <CheckCircleIcon color="success" />}
+                </InputAdornment>
+              ),
+            }}
           />
         )}
         {step === "2" && <StepTwo />}
